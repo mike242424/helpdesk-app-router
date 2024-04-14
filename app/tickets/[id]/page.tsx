@@ -1,10 +1,28 @@
+import { Ticket } from '@/app/types/ticket';
+import { notFound } from 'next/navigation';
+
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const response = await fetch('http://localhost:4000/tickets');
+
+  const tickets = await response.json();
+
+  return tickets.map((ticket: Ticket) => {
+    return { id: ticket.id };
+  });
+}
+
 async function getTicket(id: string) {
   const response = await fetch(`http://localhost:4000/tickets/${id}`, {
     next: {
-      revalidate: 0,
+      revalidate: 60,
     },
   });
 
+  if (!response.ok) {
+    notFound();
+  }
   return await response.json();
 }
 
@@ -14,7 +32,7 @@ export default async function TicketDetails({
   params: { id: string };
 }) {
   const ticket = await getTicket(id);
-  console.log(ticket);
+  // console.log(ticket);
   return (
     <main>
       <nav>

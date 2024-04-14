@@ -1,12 +1,5 @@
 import Link from 'next/link';
-
-type Ticket = {
-  id: string;
-  title: string;
-  body: string;
-  priority: string;
-  user_email: string;
-};
+import { Ticket } from '../types/ticket';
 
 async function getTickets() {
   const response = await fetch('http://localhost:4000/tickets', {
