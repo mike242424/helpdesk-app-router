@@ -2,9 +2,6 @@ import Link from 'next/link';
 import { Ticket } from '../types/ticket';
 
 async function getTickets() {
-  // imitating a delay
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const response = await fetch('http://localhost:4000/tickets', {
     next: {
       revalidate: 0,
