@@ -3,6 +3,19 @@ import { notFound } from 'next/navigation';
 
 export const dynamicParams = true;
 
+export async function generateMetadata({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const response = await fetch(`http://localhost:4000/tickets/${id}`);
+  const data = await response.json();
+
+  return {
+    title: `Helpdesk | ${data.title}`,
+  };
+}
+
 export async function generateStaticParams() {
   const response = await fetch('http://localhost:4000/tickets');
 
