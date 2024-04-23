@@ -8,7 +8,7 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }) {
-  const response = await fetch(`http://localhost:4000/tickets/${id}`);
+  const response = await fetch(`http://localhost:3000/tickets/${id}`);
   const data = await response.json();
 
   return {
@@ -17,7 +17,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const response = await fetch('http://localhost:4000/tickets');
+  const response = await fetch('http://localhost:3000/tickets');
 
   const tickets = await response.json();
 
@@ -27,7 +27,7 @@ export async function generateStaticParams() {
 }
 
 async function getTicket(id: string) {
-  const response = await fetch(`http://localhost:4000/tickets/${id}`, {
+  const response = await fetch(`http://localhost:3000/tickets/${id}`, {
     next: {
       revalidate: 60,
     },

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Ticket } from '../../types/ticket';
 
 async function getTickets() {
-  const response = await fetch('http://localhost:4000/tickets', {
+  const response = await fetch('http://localhost:3000/tickets', {
     next: {
       revalidate: 0,
     },
